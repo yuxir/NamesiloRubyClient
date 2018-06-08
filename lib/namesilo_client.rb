@@ -7,11 +7,10 @@ module NamesiloClient
 
     def initialize(apikey)
       @apikey = apikey
-      @host = 'https://www.namesilo.com/api/'
+      @host   = 'https://www.namesilo.com/api/'
     end
 
     def get_connection()
-
       conn = Faraday.new(:url => @host) do |c|
         c.use Faraday::Request::UrlEncoded 
         c.use Faraday::Adapter::NetHttp     
