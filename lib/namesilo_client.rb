@@ -40,5 +40,9 @@ module NamesiloClient
       get_request('contactList?'+get_url_parameters({})).body
     end
 
+    # List all domains
+    def list_domains()
+      get_request('listDomains?'+get_url_parameters({})).body
+    end
   end
 end
