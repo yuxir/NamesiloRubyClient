@@ -33,6 +33,14 @@ describe NamesiloClient do
     end
   end
 
-
+  # Test list_dns_records
+  it "has list_dns_records" do
+    domains_doc  = Nokogiri::XML(client.list_domains())
+    domains_doc.xpath('/namesilo/reply/domains/domain').each do |domain|
+      dns_doc = Nokogiri::XML(client.list_dns_records(domain.text()))
+      expect(dns_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('dnsListRecords')
+      expect(dns_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+    end
+  end
 
 end

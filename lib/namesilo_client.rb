@@ -50,6 +50,9 @@ module NamesiloClient
       get_request('getDomainInfo?'+get_url_parameters({'domain':domain})).body
     end
 
-    
+    # List DNS records
+    def list_dns_records(domain)
+      get_request('dnsListRecords?'+get_url_parameters({'domain':domain})).body
+    end
   end
 end
