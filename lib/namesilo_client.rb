@@ -59,5 +59,10 @@ module NamesiloClient
     def get_portfolio_list()
       get_request('portfolioList?'+get_url_parameters({})).body
     end
+
+    # listRegisteredNameServers
+    def list_name_servers(domain)
+      get_request('listRegisteredNameServers?'+get_url_parameters({'domain':domain})).body
+    end
   end
 end

@@ -50,4 +50,14 @@ describe NamesiloClient do
     expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
   end
   
+  # Test list_name_servers
+  it "has list_name_servers" do
+    domains_doc  = Nokogiri::XML(client.list_domains())
+    domains_doc.xpath('/namesilo/reply/domains/domain').each do |domain|
+      ns_doc = Nokogiri::XML(client.list_name_servers(domain.text()))
+      expect(ns_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('listRegisteredNameServers')
+      expect(ns_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+    end
+  end
+
 end
