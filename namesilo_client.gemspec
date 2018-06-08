@@ -10,9 +10,8 @@ Gem::Specification.new do |s|
   s.description = "Namesilo API client is a wrapper of Namesilo REST APIs."
   s.authors     = ["Yuxi"]
   s.files       = ["lib/namesilo_client.rb"]
-  s.homepage    =
-    'http://rubygems.org/gems/namesilo_client'
-  s.license       = 'MIT'
+  s.homepage    = 'http://rubygems.org/gems/namesilo_client'
+  s.license     = 'MIT'
 
   s.add_runtime_dependency 'faraday', '~> 0.13'
   s.add_runtime_dependency 'addressable', '~> 2.5'
