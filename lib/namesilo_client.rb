@@ -44,5 +44,12 @@ module NamesiloClient
     def list_domains()
       get_request('listDomains?'+get_url_parameters({})).body
     end
+
+    # Get domain info
+    def get_domain_info(domain)
+      get_request('getDomainInfo?'+get_url_parameters({'domain':domain})).body
+    end
+
+    
   end
 end
