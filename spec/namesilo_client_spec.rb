@@ -43,4 +43,11 @@ describe NamesiloClient do
     end
   end
 
+  # get_portfolio_list
+  it "has get_portfolio_list" do
+    xml_doc  = Nokogiri::XML(client.get_portfolio_list())
+    expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('portfolioList')
+    expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+  end
+  
 end
