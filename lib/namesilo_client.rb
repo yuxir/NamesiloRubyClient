@@ -64,5 +64,11 @@ module NamesiloClient
     def list_name_servers(domain)
       get_request('listRegisteredNameServers?'+get_url_parameters({'domain':domain})).body
     end
+
+    # listEmailForwards
+    def list_email_forwards(domain)
+      get_request('listEmailForwards?'+get_url_parameters({'domain':domain})).body
+    end
+
   end
 end

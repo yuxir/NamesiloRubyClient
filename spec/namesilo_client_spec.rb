@@ -60,4 +60,15 @@ describe NamesiloClient do
     end
   end
 
+  # Test list_email_forwards
+  it "has list_email_forwards" do
+    domains_doc  = Nokogiri::XML(client.list_domains())
+    domains_doc.xpath('/namesilo/reply/domains/domain').each do |domain|
+      ef_doc = Nokogiri::XML(client.list_email_forwards(domain.text()))
+      expect(ef_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('listEmailForwards')
+      expect(ef_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+    end
+  end
+
+
 end
