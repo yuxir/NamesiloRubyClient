@@ -4,7 +4,7 @@ require 'addressable'
 
 module NamesiloClient
   class API
-    
+	    
     # Class constructor
     def initialize(apikey)
       @apikey = apikey
@@ -35,9 +35,9 @@ module NamesiloClient
       uri.query
     end
 
-    # Return namesilo account information
-    def get_account()
-      get_request('contactList?'+get_url_parameters({})).body
+    # Return namesilo contact information
+    def get_contact_list(params={})
+      get_request('contactList?'+get_url_parameters(params)).body
     end
 
     # add a contact information
