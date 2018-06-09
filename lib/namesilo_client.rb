@@ -75,6 +75,10 @@ module NamesiloClient
       get_request('registrantVerificationStatus?'+get_url_parameters({})).body
     end
 
+    # getAccountBalance
+    def get_account_balance()
+      get_request('getAccountBalance?'+get_url_parameters({})).body
+    end
 
   end
 end

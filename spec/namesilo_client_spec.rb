@@ -77,6 +77,13 @@ describe NamesiloClient do
     expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('registrantVerificationStatus')
     expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
   end
+
+  # Test get_account_balance
+  it "has get_account_balance" do
+    xml_doc  = Nokogiri::XML(client.get_account_balance())
+    expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('getAccountBalance')
+    expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+  end
   
 
 end
