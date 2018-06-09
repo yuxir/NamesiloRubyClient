@@ -80,5 +80,14 @@ module NamesiloClient
       get_request('getAccountBalance?'+get_url_parameters({})).body
     end
 
+    # getPrices
+    def get_prices()
+      get_request('getPrices?'+get_url_parameters({})).body
+    end
+
+    # listOrders
+    def list_orders()
+      get_request('listOrders?'+get_url_parameters({})).body
+    end
   end
 end

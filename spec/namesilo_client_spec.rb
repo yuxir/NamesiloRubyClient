@@ -84,6 +84,19 @@ describe NamesiloClient do
     expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('getAccountBalance')
     expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
   end
-  
+
+  # Test get_prices
+  it "has get_prices" do
+    xml_doc  = Nokogiri::XML(client.get_prices())
+    expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('getPrices')
+    expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+  end  
+
+  # Test list_orders
+  it "has list_orders" do
+    xml_doc  = Nokogiri::XML(client.list_orders())
+    expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('listOrders')
+    expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+  end
 
 end
