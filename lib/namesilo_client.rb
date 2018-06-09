@@ -40,6 +40,37 @@ module NamesiloClient
       get_request('contactList?'+get_url_parameters({})).body
     end
 
+    # add a contact information
+    # params is a JSON string
+    # required fields:
+    #   fn: First Name
+    #   ln: Last Name
+    #   ad: Mailing Address
+    #   cy: Mailing City
+    #   st: Mailing State/Province/Territory
+    #   If country is US or CA, you must use the correct abbreviation
+    #   zp: Mailing Zip/Postal Code
+    #   ct: Mailing Country
+    #   Country must use the correct abbreviation
+    #   em: Email Address
+    #   ph: Phone Number
+    # Optional Fields
+    #   nn: Nickname (24)
+    #   cp: Company (64)
+    #   ad2: Mailing Address 2 (128)
+    #   fx: Fax (32)
+    #   US Fields:
+    #     usnc: .US Nexus Category (3) (must use correct abbreviation)
+    #     usap: .US Application Purpose (2) (must use correct abbreviation)
+    #   CA Optional Fields
+    #     calf: CIRA Legal Form (correct abbreviations)
+    #     caln: CIRA Language (correct abbreviations)
+    #     caag: CIRA Agreement Version (correct abbreviations)
+    #     cawd: CIRA WHOIS Display
+    def add_contact(params)
+      get_request('contactAdd?'+get_url_parameters(params)).body
+    end
+
     # List all domains
     def list_domains()
       get_request('listDomains?'+get_url_parameters({})).body
