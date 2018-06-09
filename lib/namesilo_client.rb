@@ -89,5 +89,13 @@ module NamesiloClient
     def list_orders()
       get_request('listOrders?'+get_url_parameters({})).body
     end
+
+    # orderDetails
+    def order_details(order_number)
+      get_request('orderDetails?'+get_url_parameters({'order_number':order_number})).body
+    end
+
+    
+
   end
 end
