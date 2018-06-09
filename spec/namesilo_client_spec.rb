@@ -5,6 +5,7 @@ require 'nokogiri'
 
 describe NamesiloClient do
 
+  # Load API key
   Dotenv.load
   client = NamesiloClient::API.new(ENV['APIKEY'])  
 
@@ -70,5 +71,12 @@ describe NamesiloClient do
     end
   end
 
+  # Test get_registrant_verification_status
+  it "has get_registrant_verification_status" do
+    xml_doc  = Nokogiri::XML(client.get_registrant_verification_status())
+    expect(xml_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('registrantVerificationStatus')
+    expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
+  end
+  
 
 end

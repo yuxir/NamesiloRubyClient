@@ -70,5 +70,11 @@ module NamesiloClient
       get_request('listEmailForwards?'+get_url_parameters({'domain':domain})).body
     end
 
+    # registrantVerificationStatus
+    def get_registrant_verification_status()
+      get_request('registrantVerificationStatus?'+get_url_parameters({})).body
+    end
+
+
   end
 end
