@@ -97,6 +97,38 @@ module NamesiloClient
       get_request('dnsListRecords?'+get_url_parameters({'domain':domain})).body
     end
 
+    # Add a DNS record
+    # Parameters:
+    #   domain: The domain being updated
+    #   rrtype: DNS record type, e.g. "A", "AAAA", "CNAME", "MX" and "TXT"
+    #   rrhost: hostname for the new record 
+    #   rrvalue: The value for the resource record
+    #   rrdistance: Only used for MX (default is 10 if not provided)
+    #   rrttl: The TTL for the new record (default is 7207 if not provided)
+    def add_dns_record(params)
+      get_request('dnsAddRecord?'+get_url_parameters(params)).body
+    end
+
+    # Update DNS record
+    # Parameters:
+    #   domain
+    #   rrid: The unique ID of the resource record. 
+    #   rrhost: The hostname
+    #   rrvalue: The value for the resource record
+    #   rrdistance: Only used for MX
+    #   rrttl: The TTL for this record (default is 7207 if not provided)
+    def update_dns_record(params)
+      get_request('dnsUpdateRecord?'+get_url_parameters(params)).body
+    end
+
+    # Delete DNS record
+    # Parameters:
+    #  domain
+    #  rrid: The unique ID of the resource record
+    def delete_dns_record(params)
+      get_request('dnsDeleteRecord?'+get_url_parameters(params)).body
+    end
+
     # checkTransferStatus
     # Parameter: domain name
     # returns XML containing domain transfer status
@@ -175,8 +207,6 @@ module NamesiloClient
     def order_details(order_number)
       get_request('orderDetails?'+get_url_parameters({'order_number':order_number})).body
     end
-
-    
 
   end
 end
