@@ -114,6 +114,12 @@ module NamesiloClient
       get_request('checkRegisterAvailability?'+get_url_parameters({'domains':domains})).body
     end
 
+    # retrieveAuthCode
+    # Have the EPP transfer code for the domain emailed to the administrative contact.
+    def retrieve_auth_code(domain)
+      get_request('retrieveAuthCode?'+get_url_parameters({'domain':domain})).body
+    end
+
     # Get a list of all active portfolios within your account.
     # returns XML containing all portfolios
     # xpath: /namesilo/reply/portfolios
