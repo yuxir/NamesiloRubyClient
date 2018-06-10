@@ -53,6 +53,12 @@ describe NamesiloClient do
     end
   end
 
+  # Test check_register_availability
+  it "has check_register_availability" do
+    status_doc = Nokogiri::XML(client.check_register_availability('namesilo.com,namesilo.org,namesilo.net'))
+    expect(status_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('checkRegisterAvailability')
+  end
+
 
   # get_portfolio_list
   it "has get_portfolio_list" do

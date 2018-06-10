@@ -105,6 +105,15 @@ module NamesiloClient
       get_request('checkTransferStatus?'+get_url_parameters({'domain':domain})).body
     end
 
+    # checkRegisterAvailability
+    # Parameter: register domain names in JSON, seperated by comma
+    #        e.g. {'domains':'namesilo.com,namesilo.net,namesilo.org'}
+    # returns XML with available, unavailable, and invalid domains
+    # xpath: /namesilo/reply
+    def check_register_availability(domains)
+      get_request('checkRegisterAvailability?'+get_url_parameters({'domains':domains})).body
+    end
+
     # Get a list of all active portfolios within your account.
     # returns XML containing all portfolios
     # xpath: /namesilo/reply/portfolios
