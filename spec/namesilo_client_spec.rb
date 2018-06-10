@@ -44,6 +44,16 @@ describe NamesiloClient do
     end
   end
 
+  # Test check_transfer_status
+  it "has check_transfer_status" do
+    domains_doc  = Nokogiri::XML(client.list_domains())
+    domains_doc.xpath('/namesilo/reply/domains/domain').each do |domain|
+      transfer_doc = Nokogiri::XML(client.check_transfer_status(domain.text()))
+      expect(transfer_doc.xpath('/namesilo/request/operation/text()').to_s).to eq('checkTransferStatus')
+    end
+  end
+
+
   # get_portfolio_list
   it "has get_portfolio_list" do
     xml_doc  = Nokogiri::XML(client.get_portfolio_list())

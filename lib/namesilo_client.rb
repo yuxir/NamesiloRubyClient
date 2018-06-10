@@ -97,6 +97,14 @@ module NamesiloClient
       get_request('dnsListRecords?'+get_url_parameters({'domain':domain})).body
     end
 
+    # checkTransferStatus
+    # Parameter: domain name
+    # returns XML containing domain transfer status
+    # xpath: /namesilo/reply
+    def check_transfer_status(domain)
+      get_request('checkTransferStatus?'+get_url_parameters({'domain':domain})).body
+    end
+
     # Get a list of all active portfolios within your account.
     # returns XML containing all portfolios
     # xpath: /namesilo/reply/portfolios
