@@ -36,6 +36,9 @@ module NamesiloClient
     end
 
     # Return namesilo contact information
+    # By default, it returns all contact informaton
+    # Optional parameter: contact_id
+    # e.g. get_contact_list(params={contact_id:'11111111'})
     def get_contact_list(params={})
       get_request('contactList?'+get_url_parameters(params)).body
     end
@@ -72,56 +75,80 @@ module NamesiloClient
     end
 
     # List all domains
+    # Returns XML
+    # xpath: /namesilo/reply/domains/domain
     def list_domains()
       get_request('listDomains?'+get_url_parameters({})).body
     end
 
     # Get domain info
+    # Parameter: domain name
+    # returns XML containing all domain info
+    # xpath: /namesilo/reply
     def get_domain_info(domain)
       get_request('getDomainInfo?'+get_url_parameters({'domain':domain})).body
     end
 
     # List DNS records
+    # Parameter: domain name
+    # returns XML containing all DNS records
+    # xpath: /namesilo/reply/resource_record
     def list_dns_records(domain)
       get_request('dnsListRecords?'+get_url_parameters({'domain':domain})).body
     end
 
-    # portfolioList
+    # Get a list of all active portfolios within your account.
+    # returns XML containing all portfolios
+    # xpath: /namesilo/reply/portfolios
     def get_portfolio_list()
       get_request('portfolioList?'+get_url_parameters({})).body
     end
 
     # listRegisteredNameServers
+    # returns XML containing all name servers
+    # xpath: /namesilo/reply/hosts
     def list_name_servers(domain)
       get_request('listRegisteredNameServers?'+get_url_parameters({'domain':domain})).body
     end
 
     # listEmailForwards
+    # returns all email forwards
+    # xpath: /namesilo/reply/addresses
     def list_email_forwards(domain)
       get_request('listEmailForwards?'+get_url_parameters({'domain':domain})).body
     end
 
     # registrantVerificationStatus
+    # Shows the verification status for any Registrant email addresses
+    # xpath: /namesilo/reply/email
     def get_registrant_verification_status()
       get_request('registrantVerificationStatus?'+get_url_parameters({})).body
     end
 
     # getAccountBalance
+    # returns current account funds balance.
+    # xpath: /namesilo/reply
     def get_account_balance()
       get_request('getAccountBalance?'+get_url_parameters({})).body
     end
 
     # getPrices
+    # returns price list
+    # xpath: /namesilo/reply
     def get_prices()
       get_request('getPrices?'+get_url_parameters({})).body
     end
 
     # listOrders
+    # Returns Complete Account Order History
+    # xpath: /namesilo/reply/order
     def list_orders()
       get_request('listOrders?'+get_url_parameters({})).body
     end
 
     # orderDetails
+    # returns details for provided order number
+    # xpath: /namesilo/reply
     def order_details(order_number)
       get_request('orderDetails?'+get_url_parameters({'order_number':order_number})).body
     end
