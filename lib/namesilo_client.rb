@@ -208,5 +208,17 @@ module NamesiloClient
       get_request('orderDetails?'+get_url_parameters({'order_number':order_number})).body
     end
 
+    # renewDomain
+    # Parameters (format should be in JSON, e.g. {'domain':'yourdomain.com','years':'1'}):
+    #  domain(required): The domain to renew
+    #  years(required): The number of years to renew the domain
+    #  payment_id(optional): the id of verified payment method, if not specified, your account balance will be used
+    #  coupon(optional): the coupon code used in this transaction
+    def renew_domain(params)
+      get_request('renewDomain?'+get_url_parameters(params)).body
+    end
+
+    
+
   end
 end
