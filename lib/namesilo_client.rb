@@ -210,15 +210,31 @@ module NamesiloClient
 
     # renewDomain
     # Parameters (format should be in JSON, e.g. {'domain':'yourdomain.com','years':'1'}):
-    #  domain(required): The domain to renew
-    #  years(required): The number of years to renew the domain
-    #  payment_id(optional): the id of verified payment method, if not specified, your account balance will be used
-    #  coupon(optional): the coupon code used in this transaction
+    #   domain(required): The domain to renew
+    #   years(required): The number of years to renew the domain
+    #
+    #   payment_id(optional): the id of verified payment method, if not specified, your account balance will be used
+    #   coupon(optional): the coupon code used in this transaction
     def renew_domain(params)
       get_request('renewDomain?'+get_url_parameters(params)).body
     end
 
-    
+    # registerDomain
+    # Parameters
+    #   domain(required): The domain to renew
+    #   years(required): The number of years to renew the domain    
+    #
+    #   payment_id(optional)
+    #   coupon(optional)
+    #   private(optional): if the free WHOIS privacy service will be used or not 
+    #   auto_renew(optional)
+    #   portfolio(optional): the name of the portfolio to link the registered domain with
+    #   ns1-13(optional): up to 13 name servers to use for the domain registration
+    #   contact info(optional): see https://www.namesilo.com/api_reference.php#registerDomain
+    def register_domain(params)
+      get_request('registerDomain?'+get_url_parameters(params)).body
+    end
+
 
   end
 end
