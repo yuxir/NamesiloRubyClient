@@ -235,6 +235,22 @@ module NamesiloClient
       get_request('registerDomain?'+get_url_parameters(params)).body
     end
 
+    # transferDomain
+    # Parameters 
+    #   domain(required)
+    #
+    #   payment_id(optional)
+    #   auth(optional): transfer authorization code
+    #   private(optional): if you want the domain to utilize our free WHOIS privacy service
+    #   auto_renew(optional) 
+    #   portfolio(optional) 
+    #   coupon(optional)
+    #   Passing Contact Information(optional): see https://www.namesilo.com/api_reference.php#transferDomain
+    #   Passing Contact ID(optional): see https://www.namesilo.com/api_reference.php#transferDomain
+    def transfer_domain(params)
+      get_request('transferDomain?'+get_url_parameters(params)).body
+    end
+    
 
   end
 end
