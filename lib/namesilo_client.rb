@@ -251,6 +251,14 @@ module NamesiloClient
       get_request('transferDomain?'+get_url_parameters(params)).body
     end
     
+    # transferUpdateChangeEPPCode
+    # Parameters
+    #   domain
+    #   auth: The EPP code to use
+    def transfer_update_change_epp_code(domain,epp_code)
+      params={'domain':domain,'auth':epp_code}
+      get_request('transferUpdateChangeEPPCode?'+get_url_parameters(params)).body
+    end
 
   end
 end
