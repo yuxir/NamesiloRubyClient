@@ -260,5 +260,13 @@ module NamesiloClient
       get_request('transferUpdateChangeEPPCode?'+get_url_parameters(params)).body
     end
 
+    # transferUpdateResendAdminEmail
+    # Parameters
+    #   domain
+    def transfer_update_resend_admin_email(domain)
+      params={'domain':domain}
+      get_request('transferUpdateResendAdminEmail?'+get_url_parameters(params)).body
+    end
+
   end
 end
