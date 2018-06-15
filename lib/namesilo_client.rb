@@ -276,6 +276,15 @@ module NamesiloClient
       get_request('transferUpdateResubmitToRegistry?'+get_url_parameters(params)).body
     end
 
+    # checkTransferAvailability
+    # Parameters
+    #   domains: A comma-delimited list of domains
+    def check_transfer_availability(domains)
+      params={'domains':domains}
+      get_request('checkTransferAvailability?'+get_url_parameters(params)).body
+    end
+
+
 
   end
 end
