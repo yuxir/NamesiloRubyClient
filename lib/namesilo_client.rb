@@ -74,6 +74,12 @@ module NamesiloClient
       get_request('contactAdd?'+get_url_parameters(params)).body
     end
 
+    # contactUpdate
+    # Parameters: see add_contact
+    def update_contact(params)
+      get_request('contactUpdate?'+get_url_parameters(params)).body
+    end
+
     # List all domains
     # Returns XML
     # xpath: /namesilo/reply/domains/domain
