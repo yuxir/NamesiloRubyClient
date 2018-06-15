@@ -316,6 +316,14 @@ module NamesiloClient
       get_request('changeNameServers?'+get_url_parameters(params)).body
     end
 
+    # dnsSecListRecords
+    # Parameters
+    #  domain
+    def list_dns_sec_records(domain)
+      params={'domain':domain}
+      get_request('dnsSecListRecords?'+get_url_parameters(params)).body
+    end
+
 
   end
 end
