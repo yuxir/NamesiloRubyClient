@@ -308,6 +308,14 @@ module NamesiloClient
       get_request('contactDomainAssociate?'+get_url_parameters(params)).body
     end
 
+    # changeNameServers
+    # Parameters
+    #  domain
+    #  ns1-ns13: must provide between 2 and 13 name servers
+    def change_name_servers(params)
+      get_request('changeNameServers?'+get_url_parameters(params)).body
+    end
+
 
   end
 end
