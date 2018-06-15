@@ -296,6 +296,17 @@ module NamesiloClient
       get_request('checkTransferAvailability?'+get_url_parameters(params)).body
     end
 
+    # contactDomainAssociate
+    # Parameters
+    #   domains (required)
+    #
+    #   registrant(optional): registrant's contact id
+    #   administrative(optional): admin's contact id
+    #   billing(optional): billing contact id
+    #   technical(optional): technical role contact id
+    def contact_domain_associate(params)
+      get_request('contactDomainAssociate?'+get_url_parameters(params)).body
+    end
 
 
   end
