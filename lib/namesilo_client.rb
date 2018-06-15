@@ -80,6 +80,12 @@ module NamesiloClient
       get_request('contactUpdate?'+get_url_parameters(params)).body
     end
 
+    # contactDelete
+    def delete_contact(contact_id)
+      params={'contact_id':contact_id}
+      get_request('contactDelete?'+get_url_parameters(params)).body
+    end
+
     # List all domains
     # Returns XML
     # xpath: /namesilo/reply/domains/domain
