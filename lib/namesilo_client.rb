@@ -268,5 +268,14 @@ module NamesiloClient
       get_request('transferUpdateResendAdminEmail?'+get_url_parameters(params)).body
     end
 
+    # transferUpdateResubmitToRegistry
+    # Parameters
+    #   domain
+    def transfer_update_resubmit_to_registry(domain)
+      params={'domain':domain}
+      get_request('transferUpdateResubmitToRegistry?'+get_url_parameters(params)).body
+    end
+
+
   end
 end
