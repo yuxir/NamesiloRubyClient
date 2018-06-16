@@ -324,7 +324,18 @@ module NamesiloClient
       get_request('dnsSecListRecords?'+get_url_parameters(params)).body
     end
 
-    
+    # dnsSecAddRecord
+    # Parameters
+    #  domain
+    #  digest: The digest
+    #  keyTag: The key tag
+    #  digestType: The digest type ( accepted values: https://www.namesilo.com/api_reference.php#dnsSecAddRecord )
+    #  alg: see: https://www.namesilo.com/api_reference.php#dnsSecAddRecord
+    def add_dns_sec_record(params)
+      get_request('dnsSecAddRecord?'+get_url_parameters(params)).body
+    end    
+
+
 
   end
 end
