@@ -366,7 +366,14 @@ module NamesiloClient
       get_request('portfolioDomainAssociate?'+get_url_parameters(params)).body
     end
 
-     
+    # addRegisteredNameServer: add a registered name server
+    # Parameters:
+    #  new_host: the host name
+    #  ip1(required): IP Address for new name server
+    #  ip2-ip13(optional)
+    def add_registered_name_server(params)
+      get_request('addRegisteredNameServer?'+get_url_parameters(params)).body
+    end     
 
   end
 end
