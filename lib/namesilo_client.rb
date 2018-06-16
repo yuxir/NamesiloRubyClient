@@ -357,8 +357,16 @@ module NamesiloClient
       get_request('portfolioDelete?'+get_url_parameters(params)).body
     end
 
-    
+    # portfolioDomainAssociate
+    # Parameters:
+    #  domains
+    #  portfolio
+    def associate_domain_portfolio(portfolio,domains)
+      params={'portfolio':portfolio,'domains':domains}
+      get_request('portfolioDomainAssociate?'+get_url_parameters(params)).body
+    end
 
+     
 
   end
 end
