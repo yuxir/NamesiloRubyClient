@@ -385,6 +385,14 @@ module NamesiloClient
       get_request('modifyRegisteredNameServer?'+get_url_parameters(params)).body
     end
 
+    # deleteRegisteredNameServer
+    # Parameters:
+    #  current_host: current host name
+    def delete_registered_name_server(hostname)
+      params={'hostname':hostname}
+      get_request('deleteRegisteredNameServer?'+get_url_parameters(params)).body
+    end
+
     
 
   end
