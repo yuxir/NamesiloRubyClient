@@ -341,7 +341,13 @@ module NamesiloClient
       get_request('dnsSecDeleteRecord?'+get_url_parameters(params)).body
     end
 
-    
+    # portfolioAdd
+    # Parameters:
+    #  portfolio: The encoded name of the portfolio to add 
+    def add_portfolio(portfolio)
+      params={'portfolio':portfolio}
+      get_request('portfolioAdd?'+get_url_parameters(params)).body      
+    end    
 
   end
 end
