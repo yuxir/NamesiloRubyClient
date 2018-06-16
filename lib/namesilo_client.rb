@@ -375,5 +375,17 @@ module NamesiloClient
       get_request('addRegisteredNameServer?'+get_url_parameters(params)).body
     end     
 
+    # modifyRegisteredNameServer
+    # Parameters:
+    #  current_host: current host name
+    #  new_host: the new host name
+    #  ip1
+    #  ip2-ip13
+    def modify_registered_name_server(params)
+      get_request('modifyRegisteredNameServer?'+get_url_parameters(params)).body
+    end
+
+    
+
   end
 end
