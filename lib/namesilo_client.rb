@@ -335,7 +335,13 @@ module NamesiloClient
       get_request('dnsSecAddRecord?'+get_url_parameters(params)).body
     end    
 
+    # dnsSecDeleteRecord
+    # Parameters: as same as dnsSecAddRecord
+    def del_dns_sec_record(params)
+      get_request('dnsSecDeleteRecord?'+get_url_parameters(params)).body
+    end
 
+    
 
   end
 end
