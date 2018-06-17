@@ -506,6 +506,12 @@ module NamesiloClient
       get_request('addAccountFunds?'+get_url_parameters(params)).body
     end
 
+    # marketplaceActiveSalesOverview: a list for all active Marketplace sales in your account.
+    def marketplace_active_sales_overview()
+      params={}
+      get_request('marketplaceActiveSalesOverview?'+get_url_parameters(params)).body
+    end
+
 
 
   end
