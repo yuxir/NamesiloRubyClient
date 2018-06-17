@@ -409,6 +409,13 @@ module NamesiloClient
       get_request('removePrivacy?'+get_url_parameters(params)).body
     end
 
+    # addAutoRenewal: Set a domain to be auto-renewed.
+    def add_auto_renewal(domain)
+      params={'domain':domain}
+      get_request('addAutoRenewal?'+get_url_parameters(params)).body
+    end
+
+
 
   end
 end
