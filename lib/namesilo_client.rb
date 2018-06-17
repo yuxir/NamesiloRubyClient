@@ -460,5 +460,15 @@ module NamesiloClient
       get_request('domainLock?'+get_url_parameters(params)).body
     end
 
+    # domainUnlock
+    # Parameters
+    #   domain
+    def unlock_domain(domain)
+      params={'domain':domain}
+      get_request('domainUnlock?'+get_url_parameters(params)).body
+    end
+
+    
+
   end
 end
