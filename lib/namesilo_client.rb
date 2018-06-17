@@ -489,6 +489,13 @@ module NamesiloClient
       get_request('deleteEmailForward?'+get_url_parameters(params)).body
     end
 
+    # emailVerification: sned an email verification message
+    # Parameters
+    #   email
+    def email_verification(email)
+      params={'email':email}
+      get_request('emailVerification?'+get_url_parameters(params)).body
+    end
 
   end
 end
