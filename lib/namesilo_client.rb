@@ -514,10 +514,19 @@ module NamesiloClient
 
     # marketplaceAddOrModifySale
     # Parameters: see https://www.namesilo.com/api_reference.php#marketplaceAddOrModifySale
-    def  marketplace_add_sale(params)
+    def marketplace_add_sale(params)
       get_request('marketplaceAddOrModifySale?'+get_url_parameters(params)).body
     end
 
-    
+    # marketplaceLandingPageUpdate
+    # required parameters
+    #   domain
+    # 
+    # optional parameters: see https://www.namesilo.com/api_reference.php#marketplaceLandingPageUpdate
+    def marketplace_landing_page_update(params)
+      get_request('marketplaceLandingPageUpdate?'+get_url_parameters(params)).body
+    end
+
+
   end
 end
