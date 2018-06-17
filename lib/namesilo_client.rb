@@ -443,6 +443,15 @@ module NamesiloClient
       get_request('domainForwardSubDomain?'+get_url_parameters(params)).body
     end
 
+    # domainForwardSubDomainDelete: delete a subdomain forward
+    # Parameters
+    #  domain
+    #  subdomain
+    def delete_forward_sub_domain(domain, subdomain)
+      params={'domain':domain, 'subdomain':subdomain}
+      get_request('domainForwardSubDomainDelete?'+get_url_parameters(params)).body
+    end
+
     
 
   end
