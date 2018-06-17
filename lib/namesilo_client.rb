@@ -436,6 +436,13 @@ module NamesiloClient
       get_request('domainForward?'+get_url_parameters(params)).body
     end
 
+    # domainForwardSubDomain
+    # Parameters: as same as forward_domain, plus:
+    #   sub_domain
+    def forward_sub_domain(params)
+      get_request('domainForwardSubDomain?'+get_url_parameters(params)).body
+    end
+
     
 
   end
