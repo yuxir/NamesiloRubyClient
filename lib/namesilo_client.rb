@@ -415,6 +415,12 @@ module NamesiloClient
       get_request('addAutoRenewal?'+get_url_parameters(params)).body
     end
 
+    # removeAutoRenewal: set a domain to not be auto-renewed
+    def remove_auto_renewal(domain)
+      params={'domain':domain}
+      get_request('removeAutoRenewal?'+get_url_parameters(params)).body
+    end
+
 
 
   end
