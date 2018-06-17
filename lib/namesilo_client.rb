@@ -497,5 +497,16 @@ module NamesiloClient
       get_request('emailVerification?'+get_url_parameters(params)).body
     end
 
+    # addAccountFunds: increase NameSilo account funds balance
+    # Parameters
+    #   amount: the amount in US Dollars 
+    #   payment_id: The ID of the verified credit card
+    def add_account_funds(amount,payment_id)
+      params={'amount':amount,'payment_id':payment_id}
+      get_request('addAccountFunds?'+get_url_parameters(params)).body
+    end
+
+
+
   end
 end
