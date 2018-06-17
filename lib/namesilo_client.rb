@@ -480,7 +480,15 @@ module NamesiloClient
       get_request('configureEmailForward?'+get_url_parameters(params)).body
     end    
 
-    
+    # deleteEmailForward: delete a email forward
+    # Parameters
+    #   domain
+    #   email
+    def delete_forward_email(domain,email)
+      params={'domain':domain, 'email':email}
+      get_request('deleteEmailForward?'+get_url_parameters(params)).body
+    end
+
 
   end
 end
