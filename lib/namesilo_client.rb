@@ -2,6 +2,7 @@ require 'faraday'
 require 'json'
 require 'addressable'
 require 'nokogiri'
+require 'dns_record'
 
 module NamesiloClient
   class API
@@ -118,6 +119,24 @@ module NamesiloClient
     # xpath: /namesilo/reply/resource_record
     def list_dns_records(domain)
       get_request('dnsListRecords?'+get_url_parameters({'domain':domain})).body
+    end
+
+    # List DNS records
+    # Returns an array containing DNS record object
+    def list_dns_records_array(domain)
+      dns_records = []
+      doc = Nokogiri::XML(list_dns_records(domain))
+      doc.xpath('/namesilo/reply/resource_record').each do |r|
+        record = DnsRecord.new
+        record.recordid  = r.xpath('record_id').text()
+        record.host      = r.xpath('host').text()
+        record.type      = r.xpath('type').text()
+        record.value     = r.xpath('value').text()
+        record.ttl       = r.xpath('ttl').text()
+        record.distance  = r.xpath('distance').text()        
+        dns_records << record
+      end
+      dns_records
     end
 
     # Add a DNS record
