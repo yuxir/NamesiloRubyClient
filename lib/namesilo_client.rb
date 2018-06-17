@@ -452,7 +452,13 @@ module NamesiloClient
       get_request('domainForwardSubDomainDelete?'+get_url_parameters(params)).body
     end
 
-    
+    # domainLock: set a domain to be locked
+    # Parameters
+    #   domain
+    def lock_domain(domain)
+      params={'domain':domain}
+      get_request('domainLock?'+get_url_parameters(params)).body
+    end
 
   end
 end
