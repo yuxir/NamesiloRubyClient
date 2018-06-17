@@ -421,7 +421,22 @@ module NamesiloClient
       get_request('removeAutoRenewal?'+get_url_parameters(params)).body
     end
 
+    # domainForward
+    # Required parameters:
+    #  domain
+    #  protocol: http or https
+    #  address: the web site address to forward to
+    #  method: "301", "302" or "cloaked"
+    #  
+    # Optional parameters:
+    #  meta_title: The META title for cloaked forward
+    #  meta_description
+    #  meta_keywords: The META keywords for cloaked forward 
+    def forward_domain(params)
+      get_request('domainForward?'+get_url_parameters(params)).body
+    end
 
+    
 
   end
 end
