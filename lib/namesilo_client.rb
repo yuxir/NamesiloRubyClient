@@ -74,6 +74,18 @@ module NamesiloClient
       get_request('contactAdd?'+get_url_parameters(params)).body
     end
 
+    # contactUpdate
+    # Parameters: see add_contact
+    def update_contact(params)
+      get_request('contactUpdate?'+get_url_parameters(params)).body
+    end
+
+    # contactDelete
+    def delete_contact(contact_id)
+      params={'contact_id':contact_id}
+      get_request('contactDelete?'+get_url_parameters(params)).body
+    end
+
     # List all domains
     # Returns XML
     # xpath: /namesilo/reply/domains/domain
@@ -206,6 +218,313 @@ module NamesiloClient
     # xpath: /namesilo/reply
     def order_details(order_number)
       get_request('orderDetails?'+get_url_parameters({'order_number':order_number})).body
+    end
+
+    # renewDomain
+    # Parameters (format should be in JSON, e.g. {'domain':'yourdomain.com','years':'1'}):
+    #   domain(required): The domain to renew
+    #   years(required): The number of years to renew the domain
+    #
+    #   payment_id(optional): the id of verified payment method, if not specified, your account balance will be used
+    #   coupon(optional): the coupon code used in this transaction
+    def renew_domain(params)
+      get_request('renewDomain?'+get_url_parameters(params)).body
+    end
+
+    # registerDomain
+    # Parameters
+    #   domain(required): The domain to renew
+    #   years(required): The number of years to renew the domain    
+    #
+    #   payment_id(optional)
+    #   coupon(optional)
+    #   private(optional): if the free WHOIS privacy service will be used or not 
+    #   auto_renew(optional)
+    #   portfolio(optional): the name of the portfolio to link the registered domain with
+    #   ns1-13(optional): up to 13 name servers to use for the domain registration
+    #   contact info(optional): see https://www.namesilo.com/api_reference.php#registerDomain
+    def register_domain(params)
+      get_request('registerDomain?'+get_url_parameters(params)).body
+    end
+
+    # transferDomain
+    # Parameters 
+    #   domain(required)
+    #
+    #   payment_id(optional)
+    #   auth(optional): transfer authorization code
+    #   private(optional): if you want the domain to utilize our free WHOIS privacy service
+    #   auto_renew(optional) 
+    #   portfolio(optional) 
+    #   coupon(optional)
+    #   Passing Contact Information(optional): see https://www.namesilo.com/api_reference.php#transferDomain
+    #   Passing Contact ID(optional): see https://www.namesilo.com/api_reference.php#transferDomain
+    def transfer_domain(params)
+      get_request('transferDomain?'+get_url_parameters(params)).body
+    end
+    
+    # transferUpdateChangeEPPCode
+    # Parameters
+    #   domain
+    #   auth: The EPP code to use
+    def transfer_update_change_epp_code(domain,epp_code)
+      params={'domain':domain,'auth':epp_code}
+      get_request('transferUpdateChangeEPPCode?'+get_url_parameters(params)).body
+    end
+
+    # transferUpdateResendAdminEmail
+    # Parameters
+    #   domain
+    def transfer_update_resend_admin_email(domain)
+      params={'domain':domain}
+      get_request('transferUpdateResendAdminEmail?'+get_url_parameters(params)).body
+    end
+
+    # transferUpdateResubmitToRegistry
+    # Parameters
+    #   domain
+    def transfer_update_resubmit_to_registry(domain)
+      params={'domain':domain}
+      get_request('transferUpdateResubmitToRegistry?'+get_url_parameters(params)).body
+    end
+
+    # checkTransferAvailability
+    # Parameters
+    #   domains: A comma-delimited list of domains
+    def check_transfer_availability(domains)
+      params={'domains':domains}
+      get_request('checkTransferAvailability?'+get_url_parameters(params)).body
+    end
+
+    # contactDomainAssociate
+    # Parameters
+    #   domains (required)
+    #
+    #   registrant(optional): registrant's contact id
+    #   administrative(optional): admin's contact id
+    #   billing(optional): billing contact id
+    #   technical(optional): technical role contact id
+    def contact_domain_associate(params)
+      get_request('contactDomainAssociate?'+get_url_parameters(params)).body
+    end
+
+    # changeNameServers
+    # Parameters
+    #  domain
+    #  ns1-ns13: must provide between 2 and 13 name servers
+    def change_name_servers(params)
+      get_request('changeNameServers?'+get_url_parameters(params)).body
+    end
+
+    # dnsSecListRecords
+    # Parameters
+    #  domain
+    def list_dns_sec_records(domain)
+      params={'domain':domain}
+      get_request('dnsSecListRecords?'+get_url_parameters(params)).body
+    end
+
+    # dnsSecAddRecord
+    # Parameters
+    #  domain
+    #  digest: The digest
+    #  keyTag: The key tag
+    #  digestType: The digest type ( accepted values: https://www.namesilo.com/api_reference.php#dnsSecAddRecord )
+    #  alg: see: https://www.namesilo.com/api_reference.php#dnsSecAddRecord
+    def add_dns_sec_record(params)
+      get_request('dnsSecAddRecord?'+get_url_parameters(params)).body
+    end    
+
+    # dnsSecDeleteRecord
+    # Parameters: as same as dnsSecAddRecord
+    def del_dns_sec_record(params)
+      get_request('dnsSecDeleteRecord?'+get_url_parameters(params)).body
+    end
+
+    # portfolioAdd
+    # Parameters:
+    #  portfolio: The encoded name of the portfolio to add 
+    def add_portfolio(portfolio)
+      params={'portfolio':portfolio}
+      get_request('portfolioAdd?'+get_url_parameters(params)).body      
+    end    
+
+    # portfolioDelete
+    # Parameters:
+    #  portfolio: The encoded name of the portfolio to add
+    def delete_portfolio(portfolio)
+      params={'portfolio':portfolio}
+      get_request('portfolioDelete?'+get_url_parameters(params)).body
+    end
+
+    # portfolioDomainAssociate
+    # Parameters:
+    #  domains
+    #  portfolio
+    def associate_domain_portfolio(portfolio,domains)
+      params={'portfolio':portfolio,'domains':domains}
+      get_request('portfolioDomainAssociate?'+get_url_parameters(params)).body
+    end
+
+    # addRegisteredNameServer: add a registered name server
+    # Parameters:
+    #  new_host: the host name
+    #  ip1(required): IP Address for new name server
+    #  ip2-ip13(optional)
+    def add_registered_name_server(params)
+      get_request('addRegisteredNameServer?'+get_url_parameters(params)).body
+    end     
+
+    # modifyRegisteredNameServer
+    # Parameters:
+    #  current_host: current host name
+    #  new_host: the new host name
+    #  ip1
+    #  ip2-ip13
+    def modify_registered_name_server(params)
+      get_request('modifyRegisteredNameServer?'+get_url_parameters(params)).body
+    end
+
+    # deleteRegisteredNameServer
+    # Parameters:
+    #  current_host: current host name
+    def delete_registered_name_server(hostname)
+      params={'hostname':hostname}
+      get_request('deleteRegisteredNameServer?'+get_url_parameters(params)).body
+    end
+
+    # addPrivacy: Add WHOIS Privacy to a domain
+    # Parameters:
+    #  domain
+    def add_privacy(domain)
+      params={'domain':domain}
+      get_request('addPrivacy?'+get_url_parameters(params)).body
+    end
+
+    # removePrivacy
+    # Parameters:
+    #  domain
+    def remove_privacy(domain)
+      params={'domain':domain}
+      get_request('removePrivacy?'+get_url_parameters(params)).body
+    end
+
+    # addAutoRenewal: Set a domain to be auto-renewed.
+    def add_auto_renewal(domain)
+      params={'domain':domain}
+      get_request('addAutoRenewal?'+get_url_parameters(params)).body
+    end
+
+    # removeAutoRenewal: set a domain to not be auto-renewed
+    def remove_auto_renewal(domain)
+      params={'domain':domain}
+      get_request('removeAutoRenewal?'+get_url_parameters(params)).body
+    end
+
+    # domainForward
+    # Required parameters:
+    #  domain
+    #  protocol: http or https
+    #  address: the web site address to forward to
+    #  method: "301", "302" or "cloaked"
+    #  
+    # Optional parameters:
+    #  meta_title: The META title for cloaked forward
+    #  meta_description
+    #  meta_keywords: The META keywords for cloaked forward 
+    def forward_domain(params)
+      get_request('domainForward?'+get_url_parameters(params)).body
+    end
+
+    # domainForwardSubDomain
+    # Parameters: as same as forward_domain, plus:
+    #   sub_domain
+    def forward_sub_domain(params)
+      get_request('domainForwardSubDomain?'+get_url_parameters(params)).body
+    end
+
+    # domainForwardSubDomainDelete: delete a subdomain forward
+    # Parameters
+    #  domain
+    #  subdomain
+    def delete_forward_sub_domain(domain, subdomain)
+      params={'domain':domain, 'subdomain':subdomain}
+      get_request('domainForwardSubDomainDelete?'+get_url_parameters(params)).body
+    end
+
+    # domainLock: set a domain to be locked
+    # Parameters
+    #   domain
+    def lock_domain(domain)
+      params={'domain':domain}
+      get_request('domainLock?'+get_url_parameters(params)).body
+    end
+
+    # domainUnlock
+    # Parameters
+    #   domain
+    def unlock_domain(domain)
+      params={'domain':domain}
+      get_request('domainUnlock?'+get_url_parameters(params)).body
+    end
+
+    # configureEmailForward: create a new email forward or modify an existing email forward
+    # Required parameters
+    #   domain
+    #   email
+    #   forward1: the first email address to foward emails
+    #   
+    # Optional parameters
+    #   forward2-5  
+    def forward_email(params)
+      get_request('configureEmailForward?'+get_url_parameters(params)).body
+    end    
+
+    # deleteEmailForward: delete a email forward
+    # Parameters
+    #   domain
+    #   email
+    def delete_forward_email(domain,email)
+      params={'domain':domain, 'email':email}
+      get_request('deleteEmailForward?'+get_url_parameters(params)).body
+    end
+
+    # emailVerification: sned an email verification message
+    # Parameters
+    #   email
+    def email_verification(email)
+      params={'email':email}
+      get_request('emailVerification?'+get_url_parameters(params)).body
+    end
+
+    # addAccountFunds: increase NameSilo account funds balance
+    # Parameters
+    #   amount: the amount in US Dollars 
+    #   payment_id: The ID of the verified credit card
+    def add_account_funds(amount,payment_id)
+      params={'amount':amount,'payment_id':payment_id}
+      get_request('addAccountFunds?'+get_url_parameters(params)).body
+    end
+
+    # marketplaceActiveSalesOverview: a list for all active Marketplace sales in your account.
+    def marketplace_active_sales_overview()
+      params={}
+      get_request('marketplaceActiveSalesOverview?'+get_url_parameters(params)).body
+    end
+
+    # marketplaceAddOrModifySale
+    # Parameters: see https://www.namesilo.com/api_reference.php#marketplaceAddOrModifySale
+    def marketplace_add_sale(params)
+      get_request('marketplaceAddOrModifySale?'+get_url_parameters(params)).body
+    end
+
+    # marketplaceLandingPageUpdate
+    # required parameters
+    #   domain
+    # 
+    # optional parameters: see https://www.namesilo.com/api_reference.php#marketplaceLandingPageUpdate
+    def marketplace_landing_page_update(params)
+      get_request('marketplaceLandingPageUpdate?'+get_url_parameters(params)).body
     end
 
   end
