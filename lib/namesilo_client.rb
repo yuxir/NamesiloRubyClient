@@ -527,6 +527,5 @@ module NamesiloClient
       get_request('marketplaceLandingPageUpdate?'+get_url_parameters(params)).body
     end
 
-
   end
 end
