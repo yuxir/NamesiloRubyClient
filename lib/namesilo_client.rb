@@ -512,7 +512,12 @@ module NamesiloClient
       get_request('marketplaceActiveSalesOverview?'+get_url_parameters(params)).body
     end
 
+    # marketplaceAddOrModifySale
+    # Parameters: see https://www.namesilo.com/api_reference.php#marketplaceAddOrModifySale
+    def  marketplace_add_sale(params)
+      get_request('marketplaceAddOrModifySale?'+get_url_parameters(params)).body
+    end
 
-
+    
   end
 end
