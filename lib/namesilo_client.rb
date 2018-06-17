@@ -393,7 +393,13 @@ module NamesiloClient
       get_request('deleteRegisteredNameServer?'+get_url_parameters(params)).body
     end
 
-    
+    # addPrivacy: Add WHOIS Privacy to a domain
+    # Parameters:
+    #  domain
+    def add_privacy(domain)
+      params={'domain':domain}
+      get_request('addPrivacy?'+get_url_parameters(params)).body
+    end
 
   end
 end
