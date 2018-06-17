@@ -468,6 +468,18 @@ module NamesiloClient
       get_request('domainUnlock?'+get_url_parameters(params)).body
     end
 
+    # configureEmailForward: create a new email forward or modify an existing email forward
+    # Required parameters
+    #   domain
+    #   email
+    #   forward1: the first email address to foward emails
+    #   
+    # Optional parameters
+    #   forward2-5  
+    def forward_email(params)
+      get_request('configureEmailForward?'+get_url_parameters(params)).body
+    end    
+
     
 
   end
