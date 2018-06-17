@@ -1,6 +1,7 @@
 require 'faraday'
 require 'json'
 require 'addressable'
+require 'nokogiri'
 
 module NamesiloClient
   class API
@@ -91,6 +92,16 @@ module NamesiloClient
     # xpath: /namesilo/reply/domains/domain
     def list_domains()
       get_request('listDomains?'+get_url_parameters({})).body
+    end
+
+    # list all domains in Array
+    def list_domains_array()
+      domains = []
+      doc = Nokogiri::XML(list_domains())
+      doc.xpath('/namesilo/reply/domains/domain').each do |domain|
+        domains << domain
+      end
+      domains
     end
 
     # Get domain info
