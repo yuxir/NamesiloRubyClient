@@ -401,5 +401,14 @@ module NamesiloClient
       get_request('addPrivacy?'+get_url_parameters(params)).body
     end
 
+    # removePrivacy
+    # Parameters:
+    #  domain
+    def remove_privacy(domain)
+      params={'domain':domain}
+      get_request('removePrivacy?'+get_url_parameters(params)).body
+    end
+
+
   end
 end
