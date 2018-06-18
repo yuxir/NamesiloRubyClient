@@ -3,6 +3,8 @@ require 'json'
 require 'addressable'
 require 'nokogiri'
 require 'dns_record'
+require 'host'
+require 'email_forward'
 
 module NamesiloClient
   class API
@@ -230,6 +232,23 @@ module NamesiloClient
     # xpath: /namesilo/reply/addresses
     def list_email_forwards(domain)
       get_request('listEmailForwards?'+get_url_parameters({'domain':domain})).body
+    end
+
+    # return email forwards array
+    def list_email_forwards_array(domain)
+      email_forwards = []
+      doc = Nokogiri::XML(list_email_forwards(domain))
+      doc.xpath('/namesilo/reply/addresses').each do |a|
+        ef = EmailForward.new
+        ef.email = a.xpath('email').text()
+        fts = []
+        a.xpath('forwards_to').each do |ft|
+          fts << ft.text()
+        end
+        ef.forwards_to = fts
+        email_forwards << ef
+      end
+      email_forwards
     end
 
     # registrantVerificationStatus
