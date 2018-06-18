@@ -208,6 +208,23 @@ module NamesiloClient
       get_request('listRegisteredNameServers?'+get_url_parameters({'domain':domain})).body
     end
 
+    # list_name_servers_array
+    def list_name_servers_array(domain)
+      name_servers = []
+      doc = Nokogiri::XML(list_name_servers(domain))
+      doc.xpath('/namesilo/reply/hosts').each do |r|
+        h = Host.new
+        h.host  = r.xpath('host').text()
+        ips = []
+        r.xpath('ip').each do |ip|
+          ips << ip.text()
+        end
+        h.ips = ips
+        name_servers << h
+      end
+      name_servers
+    end
+
     # listEmailForwards
     # returns all email forwards
     # xpath: /namesilo/reply/addresses
