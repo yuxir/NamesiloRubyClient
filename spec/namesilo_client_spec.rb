@@ -25,6 +25,11 @@ describe NamesiloClient do
     expect(xml_doc.xpath('/namesilo/reply/detail/text()').to_s).to eq('success')
   end
 
+  it "has list_domains_array" do
+    domains = client.list_domains_array()
+    expect(domains.kind_of?(Array)).to be true
+  end
+
   it "has get_domain_info" do
     domains_doc  = Nokogiri::XML(client.list_domains())
     domains_doc.xpath('/namesilo/reply/domains/domain').each do |domain|

@@ -1,6 +1,10 @@
 require 'faraday'
 require 'json'
 require 'addressable'
+require 'nokogiri'
+require 'dns_record'
+require 'host'
+require 'email_forward'
 
 module NamesiloClient
   class API
@@ -93,6 +97,16 @@ module NamesiloClient
       get_request('listDomains?'+get_url_parameters({})).body
     end
 
+    # list all domains in Array
+    def list_domains_array()
+      domains = []
+      doc = Nokogiri::XML(list_domains())
+      doc.xpath('/namesilo/reply/domains/domain').each do |domain|
+        domains << domain
+      end
+      domains
+    end
+
     # Get domain info
     # Parameter: domain name
     # returns XML containing all domain info
@@ -107,6 +121,24 @@ module NamesiloClient
     # xpath: /namesilo/reply/resource_record
     def list_dns_records(domain)
       get_request('dnsListRecords?'+get_url_parameters({'domain':domain})).body
+    end
+
+    # List DNS records
+    # Returns an array containing DNS record object
+    def list_dns_records_array(domain)
+      dns_records = []
+      doc = Nokogiri::XML(list_dns_records(domain))
+      doc.xpath('/namesilo/reply/resource_record').each do |r|
+        record = DnsRecord.new
+        record.recordid  = r.xpath('record_id').text()
+        record.host      = r.xpath('host').text()
+        record.type      = r.xpath('type').text()
+        record.value     = r.xpath('value').text()
+        record.ttl       = r.xpath('ttl').text()
+        record.distance  = r.xpath('distance').text()        
+        dns_records << record
+      end
+      dns_records
     end
 
     # Add a DNS record
@@ -178,11 +210,45 @@ module NamesiloClient
       get_request('listRegisteredNameServers?'+get_url_parameters({'domain':domain})).body
     end
 
+    # list_name_servers_array
+    def list_name_servers_array(domain)
+      name_servers = []
+      doc = Nokogiri::XML(list_name_servers(domain))
+      doc.xpath('/namesilo/reply/hosts').each do |r|
+        h = Host.new
+        h.host  = r.xpath('host').text()
+        ips = []
+        r.xpath('ip').each do |ip|
+          ips << ip.text()
+        end
+        h.ips = ips
+        name_servers << h
+      end
+      name_servers
+    end
+
     # listEmailForwards
     # returns all email forwards
     # xpath: /namesilo/reply/addresses
     def list_email_forwards(domain)
       get_request('listEmailForwards?'+get_url_parameters({'domain':domain})).body
+    end
+
+    # return email forwards array
+    def list_email_forwards_array(domain)
+      email_forwards = []
+      doc = Nokogiri::XML(list_email_forwards(domain))
+      doc.xpath('/namesilo/reply/addresses').each do |a|
+        ef = EmailForward.new
+        ef.email = a.xpath('email').text()
+        fts = []
+        a.xpath('forwards_to').each do |ft|
+          fts << ft.text()
+        end
+        ef.forwards_to = fts
+        email_forwards << ef
+      end
+      email_forwards
     end
 
     # registrantVerificationStatus
