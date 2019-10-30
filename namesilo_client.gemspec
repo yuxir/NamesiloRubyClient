@@ -15,5 +15,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'faraday', '~> 0.13'
   s.add_runtime_dependency 'addressable', '~> 2.5'
+  s.add_runtime_dependency 'nokogiri', '~> 1.10'
   s.add_development_dependency 'rspec', '~> 3.7'
 end
