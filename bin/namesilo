@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require "bundler/setup"
+require "namesilo_client"
+require "cli"
+require "nori"
+require "thor"
+
+NAMESILO_API_KEY = ENV['NAMESILO_API_KEY'] || fail("NAMESILO_API_KEY expected")
+
+class MyCLI < Thor
+  desc "add_aa [domain] [ip]", "Assign domain to IP"
+  def add_aa(full_domain, ip)
+    NamesiloClient::Cli.new.add_aa(full_domain, ip)
+  end
+
+  desc "domains", 'print list of domains'
+  def domains
+    puts NamesiloClient::Cli.new.domains
+  end
+end
+
+MyCLI.start(ARGV)
