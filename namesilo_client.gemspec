@@ -12,6 +12,9 @@ Gem::Specification.new do |s|
   s.files       = ["lib/namesilo_client.rb"]
   s.homepage    = 'http://rubygems.org/gems/namesilo_client'
   s.license     = 'MIT'
+  s.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  end
 
   s.add_runtime_dependency 'faraday', '~> 0.13'
   s.add_runtime_dependency 'addressable', '~> 2.5'
