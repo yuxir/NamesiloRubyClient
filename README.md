@@ -48,7 +48,17 @@ Basic usage:
 ```ruby
 require 'namesilo-client'
 
-client = NamesiloClient::API.new(‘YOUR_API_KEY’)
+client = NamesiloClient::API.new('YOUR_API_KEY')
 response = client.get_contact_list()
 ```
 
+## CLI Usage
+
+You can use CLI tool to interact with Namesilo:
+
+```bash
+export NAMESILO_API_KEY='YOUR_API_KEY'
+
+namesilo domains # list all your domains
+namesilo add_aa some.domain.com 1.2.3.4 # add or update DNS record
+```

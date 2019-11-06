@@ -15,9 +15,13 @@ Gem::Specification.new do |s|
   s.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
+  s.bindir        = "bin"
+  s.executables << 'namesilo'
 
   s.add_runtime_dependency 'faraday', '~> 0.13'
   s.add_runtime_dependency 'addressable', '~> 2.5'
   s.add_runtime_dependency 'nokogiri', '~> 1.10'
+  s.add_runtime_dependency "nori", "~> 2.6"
+  s.add_runtime_dependency "thor", "~> 0.20.3"
   s.add_development_dependency 'rspec', '~> 3.7'
 end
