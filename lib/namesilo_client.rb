@@ -8,7 +8,7 @@ require 'email_forward'
 
 module NamesiloClient
   class API
-	    
+
     # Class constructor
     def initialize(apikey)
       @apikey = apikey
@@ -18,8 +18,8 @@ module NamesiloClient
     # Establish connection
     def get_connection()
       conn = Faraday.new(:url => @host) do |c|
-        c.use Faraday::Request::UrlEncoded 
-        c.use Faraday::Adapter::NetHttp     
+        c.use Faraday::Request::UrlEncoded
+        c.use Faraday::Adapter::NetHttp
       end
     end
 
@@ -135,7 +135,7 @@ module NamesiloClient
         record.type      = r.xpath('type').text()
         record.value     = r.xpath('value').text()
         record.ttl       = r.xpath('ttl').text()
-        record.distance  = r.xpath('distance').text()        
+        record.distance  = r.xpath('distance').text()
         dns_records << record
       end
       dns_records
@@ -145,7 +145,7 @@ module NamesiloClient
     # Parameters:
     #   domain: The domain being updated
     #   rrtype: DNS record type, e.g. "A", "AAAA", "CNAME", "MX" and "TXT"
-    #   rrhost: hostname for the new record 
+    #   rrhost: hostname for the new record
     #   rrvalue: The value for the resource record
     #   rrdistance: Only used for MX (default is 10 if not provided)
     #   rrttl: The TTL for the new record (default is 7207 if not provided)
@@ -156,7 +156,7 @@ module NamesiloClient
     # Update DNS record
     # Parameters:
     #   domain
-    #   rrid: The unique ID of the resource record. 
+    #   rrid: The unique ID of the resource record.
     #   rrhost: The hostname
     #   rrvalue: The value for the resource record
     #   rrdistance: Only used for MX
@@ -300,11 +300,11 @@ module NamesiloClient
     # registerDomain
     # Parameters
     #   domain(required): The domain to renew
-    #   years(required): The number of years to renew the domain    
+    #   years(required): The number of years to renew the domain
     #
     #   payment_id(optional)
     #   coupon(optional)
-    #   private(optional): if the free WHOIS privacy service will be used or not 
+    #   private(optional): if the free WHOIS privacy service will be used or not
     #   auto_renew(optional)
     #   portfolio(optional): the name of the portfolio to link the registered domain with
     #   ns1-13(optional): up to 13 name servers to use for the domain registration
@@ -314,21 +314,21 @@ module NamesiloClient
     end
 
     # transferDomain
-    # Parameters 
+    # Parameters
     #   domain(required)
     #
     #   payment_id(optional)
     #   auth(optional): transfer authorization code
     #   private(optional): if you want the domain to utilize our free WHOIS privacy service
-    #   auto_renew(optional) 
-    #   portfolio(optional) 
+    #   auto_renew(optional)
+    #   portfolio(optional)
     #   coupon(optional)
     #   Passing Contact Information(optional): see https://www.namesilo.com/api_reference.php#transferDomain
     #   Passing Contact ID(optional): see https://www.namesilo.com/api_reference.php#transferDomain
     def transfer_domain(params)
       get_request('transferDomain?'+get_url_parameters(params)).body
     end
-    
+
     # transferUpdateChangeEPPCode
     # Parameters
     #   domain
@@ -399,7 +399,7 @@ module NamesiloClient
     #  alg: see: https://www.namesilo.com/api_reference.php#dnsSecAddRecord
     def add_dns_sec_record(params)
       get_request('dnsSecAddRecord?'+get_url_parameters(params)).body
-    end    
+    end
 
     # dnsSecDeleteRecord
     # Parameters: as same as dnsSecAddRecord
@@ -409,11 +409,11 @@ module NamesiloClient
 
     # portfolioAdd
     # Parameters:
-    #  portfolio: The encoded name of the portfolio to add 
+    #  portfolio: The encoded name of the portfolio to add
     def add_portfolio(portfolio)
       params={'portfolio':portfolio}
-      get_request('portfolioAdd?'+get_url_parameters(params)).body      
-    end    
+      get_request('portfolioAdd?'+get_url_parameters(params)).body
+    end
 
     # portfolioDelete
     # Parameters:
@@ -439,7 +439,7 @@ module NamesiloClient
     #  ip2-ip13(optional)
     def add_registered_name_server(params)
       get_request('addRegisteredNameServer?'+get_url_parameters(params)).body
-    end     
+    end
 
     # modifyRegisteredNameServer
     # Parameters:
@@ -493,11 +493,11 @@ module NamesiloClient
     #  protocol: http or https
     #  address: the web site address to forward to
     #  method: "301", "302" or "cloaked"
-    #  
+    #
     # Optional parameters:
     #  meta_title: The META title for cloaked forward
     #  meta_description
-    #  meta_keywords: The META keywords for cloaked forward 
+    #  meta_keywords: The META keywords for cloaked forward
     def forward_domain(params)
       get_request('domainForward?'+get_url_parameters(params)).body
     end
@@ -539,12 +539,12 @@ module NamesiloClient
     #   domain
     #   email
     #   forward1: the first email address to foward emails
-    #   
+    #
     # Optional parameters
-    #   forward2-5  
+    #   forward2-5
     def forward_email(params)
       get_request('configureEmailForward?'+get_url_parameters(params)).body
-    end    
+    end
 
     # deleteEmailForward: delete a email forward
     # Parameters
@@ -565,7 +565,7 @@ module NamesiloClient
 
     # addAccountFunds: increase NameSilo account funds balance
     # Parameters
-    #   amount: the amount in US Dollars 
+    #   amount: the amount in US Dollars
     #   payment_id: The ID of the verified credit card
     def add_account_funds(amount,payment_id)
       params={'amount':amount,'payment_id':payment_id}
@@ -587,7 +587,7 @@ module NamesiloClient
     # marketplaceLandingPageUpdate
     # required parameters
     #   domain
-    # 
+    #
     # optional parameters: see https://www.namesilo.com/api_reference.php#marketplaceLandingPageUpdate
     def marketplace_landing_page_update(params)
       get_request('marketplaceLandingPageUpdate?'+get_url_parameters(params)).body
